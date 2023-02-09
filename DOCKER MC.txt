@@ -1,0 +1,46 @@
+FIRST have clean compile and package the maven
+
+
+Then in application/properties file done with the following code
+server.port=8082
+spring.datasource.url=jdbc:mysql://mysqlservice:3306/mydb?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=Password@123
+spring.jpa.hibernate.ddl_auto=update
+spring.jpa.show-sql=true
+server.error.include-message=always
+
+The in the Dockerfile typed this
+
+FROM openjdk
+WORKDIR usr/lib
+ADD ./target/BEJ_C3_S1_Springboot_JWT_PC_1.-0.0.1-SNAPSHOT.jar /usr/lib/BEJ_C3_S1_Springboot_JWT_PC_1.-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","BEJ_C3_S1_Springboot_JWT_PC_1.-0.0.1-SNAPSHOT.jar"]
+
+Then in command prompt cd and the file path and/
+docker built -t jwtdemoimg:v1 .
+This will create a image of the spring boot application
+
+
+Then in command prompt actually 
+docker run -d -p 8082:8082 --name jwtdemo --network user-network jwtimgdemo:v1
+this command actually creates me a container of name jwtdemo
+
+
+Then after all the process the container will run then i go to the post man and posted the values 
+
+and then i checked in the mysql database in the docker application by going inside the mysqlservice clicking on that in the terminal side 
+
+
+I USED THE FOLLOWING COMMANDS
+
+
+mysql -u root -p
+Then i entered password
+Password@123
+SHOW DATABASES;
+use mydb
+SHOW TABLES;
+select * from customer; 
+
+It will show me all table with data's present
